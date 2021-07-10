@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "36f09749-d440-43a9-8b5d-bf1448b2d822",
+		"name": "Predictions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Predictions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Acсept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "/api/v1/predictions",
+					"path": [
+						"api",
+						"v1",
+						"predictions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Prediction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server_name}}/api/v1/predictions?event_id&market_type&prediction",
+					"host": [
+						"{{server_name}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"predictions"
+					],
+					"query": [
+						{
+							"key": "event_id",
+							"value": null
+						},
+						{
+							"key": "market_type",
+							"value": null
+						},
+						{
+							"key": "prediction",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"id\", \"10\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server_name}}/api/v1/predictions/{{id}}/status?status=win",
+					"host": [
+						"{{server_name}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"predictions",
+						"{{id}}",
+						"status"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "win"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server_name",
+			"value": "http://predictions-api.loc"
+		},
+		{
+			"key": "id",
+			"value": ""
+		}
+	]
+}
