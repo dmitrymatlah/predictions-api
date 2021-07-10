@@ -7,6 +7,7 @@ use App\Rules\ScoresValueRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class CreatePredictionRequest extends FormRequest
@@ -22,6 +23,8 @@ class CreatePredictionRequest extends FormRequest
     }
 
     public function failedValidation(Validator $validator) {
+        //dd($validator);
+        Log::notice('Input error', ['input' => $this->input()]);
         throw new HttpResponseException(response()->json($validator->errors(), 400));
     }
 
