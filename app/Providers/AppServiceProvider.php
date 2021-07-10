@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(RepositoryServiceProvider::class);
+
     }
 
     /**
@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->register(RepositoryServiceProvider::class);
     }
 }
