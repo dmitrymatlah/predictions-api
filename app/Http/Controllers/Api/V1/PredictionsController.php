@@ -24,12 +24,25 @@ class PredictionsController extends Controller
         $this->repository = $repository;
     }
 
-
+    /**
+     * GET /v1/predictions
+     * returns application/json collection with all the predictions
+     *
+     * @return mixed
+     */
     public function index()
     {
         return $this->repository->all();
     }
 
+    /**
+     * POST /v1/predictions
+     * gets application/json content type
+     *
+     * @param CreatePredictionRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
     public function store(CreatePredictionRequest $request)
     {
         $prediction = $this->repository->create($request->only([
@@ -39,6 +52,14 @@ class PredictionsController extends Controller
 
     }
 
+    /**
+     * PUT /v1/predictions/:id/status
+     * allows to set status of the given prediction
+     *
+     * @param UpdatePredictionStatusRequest $request
+     * @param Predictions $prediction
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function updateStatus(UpdatePredictionStatusRequest $request, Predictions $prediction)
     {
         $prediction->update($request->only(['status']));
