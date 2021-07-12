@@ -10,25 +10,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
-class CreatePredictionRequest extends FormRequest
+class CreatePredictionRequest extends PredictionRequestAbstract
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    public function failedValidation(Validator $validator) {
-        //dd($validator);
-        Log::notice('Input error', ['input' => $this->input()]);
-        throw new HttpResponseException(response()->json($validator->errors(), 400));
-    }
-
-
     /**
      * Get the validation rules that apply to the request.
      *
