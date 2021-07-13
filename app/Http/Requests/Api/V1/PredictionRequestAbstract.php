@@ -15,12 +15,16 @@ Abstract class PredictionRequestAbstract extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function failedValidation(Validator $validator) {
+    /**
+     * @param Validator $validator
+     */
+    public function failedValidation(Validator $validator): void
+    {
         Log::notice('Input error', ['input' => $this->input()]);
         throw new HttpResponseException(response()->json($validator->errors(), 400));
     }

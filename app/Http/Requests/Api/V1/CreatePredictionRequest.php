@@ -17,7 +17,7 @@ class CreatePredictionRequest extends PredictionRequestAbstract
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = [
             'event_id' => ['required', 'integer'],

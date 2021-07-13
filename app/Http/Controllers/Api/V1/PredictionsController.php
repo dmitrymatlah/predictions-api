@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\CreatePredictionRequest;
 use App\Http\Requests\Api\V1\UpdatePredictionStatusRequest;
 use App\Models\Predictions;
-use App\Repositories\PredictionsRepositoryEloquent;
+use App\Repositories\PredictionsRepositoryInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class PredictionsController extends Controller
 {
     /**
-     * @var PredictionsRepositoryEloquent
+     * @var PredictionsRepositoryInterface
      */
     protected $repository;
 
-    public function __construct(PredictionsRepositoryEloquent $repository)
+    /**
+     * PredictionsController constructor.
+     * @param PredictionsRepositoryInterface $repository
+     */
+    public function __construct(PredictionsRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }
@@ -29,7 +34,7 @@ class PredictionsController extends Controller
      */
     public function index()
     {
-        return $this->repository->all();
+        return response()->json($this->repository->all());
     }
 
     /**
@@ -40,7 +45,7 @@ class PredictionsController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(CreatePredictionRequest $request)
+    public function store(CreatePredictionRequest $request) :JsonResponse
     {
         $this->repository->create($request->only([
             'event_id', 'market_type', 'prediction']));
@@ -57,7 +62,7 @@ class PredictionsController extends Controller
      * @param Predictions $prediction
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateStatus(UpdatePredictionStatusRequest $request, Predictions $prediction)
+    public function updateStatus(UpdatePredictionStatusRequest $request, Predictions $prediction): JsonResponse
     {
         $prediction->update($request->only(['status']));
 

@@ -11,7 +11,7 @@ use App\Models\Predictions;
  *
  * @package namespace App\Repositories;
  */
-class PredictionsRepositoryEloquent extends BaseRepository implements PredictionsRepository
+class PredictionsRepositoryEloquent extends BaseRepository implements PredictionsRepositoryInterface
 {
     /**
      * Specify Model class name

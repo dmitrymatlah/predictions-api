@@ -12,7 +12,7 @@ class UpdatePredictionStatusRequest extends PredictionRequestAbstract
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'status' => ['required', Rule::in(Predictions::PREDICTIONS_STATUS_VALUES)]

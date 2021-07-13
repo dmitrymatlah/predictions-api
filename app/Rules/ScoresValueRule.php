@@ -24,7 +24,7 @@ class ScoresValueRule implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         $scores = explode(':', $value);
 
@@ -39,7 +39,7 @@ class ScoresValueRule implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return ':attribute must be score value like \'1:2\'';
     }
